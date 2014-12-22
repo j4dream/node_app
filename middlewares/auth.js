@@ -13,6 +13,10 @@ module.exports = {
 		return req.isAuthenticated();
 	},
 	authUser: function (req, res, next) {
+		if (req.url != '/' && req.url != '/user/login' && !req.isAuthenticated()) {
+			res.redirect('/user/login');
+			return;
+		};
 		next();
 	}
 }
