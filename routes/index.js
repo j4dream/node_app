@@ -16,7 +16,7 @@ module.exports.init = function (app) {
 			{
 				successRedirect: '/',
 				failureRedirect: '/user/login',
-				failureFlash: true 
+				failureFlash: true
 			}
 		),
 		user.postLogin);
@@ -24,4 +24,9 @@ module.exports.init = function (app) {
 	app.get('/user', auth.requireLogin, user.listUser);
 
 	app.get('/user/logout', user.logout);
+
+	app.get('/admin/editPost', auth.requireLogin, function(req, res) {
+		res.render('admin/editor', {title: 'Editor', user: req.user});
+	});
+
 }
