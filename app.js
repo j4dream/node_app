@@ -23,16 +23,16 @@ var app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
-app.engine('.html', require('ejs').renderFile);  
-app.set('view engine', 'html'); 
+app.engine('.html', require('ejs').renderFile);
+app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(partials());
-app.use(bodyParser()); 
-app.use(cookieParser()); 
-app.use(session({ secret: "j4dream blog"})); 
+app.use(bodyParser());
+app.use(cookieParser());
+app.use(session({ secret: "j4dream blog"}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(auth.authUser);
+//app.use(auth.authUser);
 app.use(flash());
 
 passport.use(new LocalStrategy(

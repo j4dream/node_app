@@ -15,7 +15,7 @@
         <div class="col-lg-4">
           <h2><%=item.title%></h2>
           <p><%=item.description%></p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-primary" href="article/<%=item.id%>" role="button">View details &raquo;</a></p>
         </div>
         <%if(count === 3 || i === articles.length) {
           count = 0;

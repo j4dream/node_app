@@ -1,0 +1,25 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>title</th>
+        <th>description</th>
+        <th>time</th>
+        <th>operation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% articles.forEach(function(item,i){ %>
+      <tr>
+        <td><%=i+1%></td>
+        <td><%=item.title%></td>
+        <td><%=item.description%></td>
+        <td><%=item.time%></td>
+        <td>operation</td>
+      </tr>
+      <% }); %>
+
+    </tbody>
+  </table>
+</div>
