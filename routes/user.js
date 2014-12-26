@@ -6,13 +6,11 @@ var auth = require('../middlewares/auth');
 
 module.exports = {
   listUser: function(req, res) {
-    console.log(req.user);
     User.find(function(err, data){
       res.json(data);
     })
   },
   getLogin: function (req, res) {
-    console.log(auth.getUser(req));
   	res.render('user/login', { title: 'Express', user: req.user});
   },
   postLogin: function(req, res) {
