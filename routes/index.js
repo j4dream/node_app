@@ -40,8 +40,22 @@ module.exports.init = function (app) {
 		});
 	});
 
+	app.get('/admin/delArticle/:id', auth.requireLogin, function(req, res) {
+		Artical.remove({_id: req.params.id}, function(err, article) {
+			if (err) return console.error(err);
+			res.json({code: 0, msg: 'success'});
+		});
+	});
+
 	app.get('/admin/editPost', auth.requireLogin, function(req, res) {
-		res.render('admin/editor', {title: 'Editor', user: req.user});
+		res.render('admin/editor', {title: 'Editor', user: req.user, article: {}});
+	});
+
+	app.get('/admin/editPost/:id', auth.requireLogin, function(req, res) {
+		Artical.findOne({_id: req.params.id}, function(err, article) {
+			if (err) return console.error(err);
+			res.render('admin/editor', {title: 'Editor',user: req.user, article: article});
+		});
 	});
 
 	app.post('/admin/createPost', auth.requireLogin, function(req, res) {
@@ -49,11 +63,14 @@ module.exports.init = function (app) {
 		artical.save(function (err, artical) {
 		  if (err) return console.error(err);
 		});
-  	res.render('admin/editor', {title: 'Editor', user: req.user});
+  	 res.redirect('/');
 	});
 
 	app.get('/admin/listPost', auth.requireLogin, function(req, res) {
-		Artical.find(function (err, articals) {
+		Artical
+		.find()
+		.sort({time:'desc'})
+		.exec(function (err, articals) {
 			if (err) return console.error(err);
 			res.render('admin/list-post', { title: 'Express', user: req.user, articles: articals});
 		});

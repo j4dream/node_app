@@ -2,11 +2,11 @@
 <form role="form" method="post" action="/admin/createPost">
     <div class="form-group">
     <label for="exampleInputEmail1">标题</label>
-    <input type="text" class="form-control" id="title" name="title" placeholder="标题" maxlength="30">
+    <input type="text" value="<%=article.title ? article.title : ''%>" class="form-control" id="title" name="title" placeholder="标题" maxlength="30">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">描述</label>
-    <input type="text" class="form-control" id="description" name="description" placeholder="描述" maxlength="200">
+    <input type="text" value="<%=article.description ? article.description : ''%>" class="form-control" id="description" name="description" placeholder="描述" maxlength="200">
   </div>
   <div class="form-group">
     <label for="exampleInputFile">小图片</label>
@@ -14,7 +14,7 @@
     <p class="help-block">上传小图片</p>
   </div>
   <textarea name="content" id="editor1" rows="10" cols="80">
-  This is my textarea to be replaced with CKEditor.
+  <%-article.content ? article.content : ''%>
   </textarea>
   </br>
   <button type="submit" class="btn btn-default">Submit</button>
