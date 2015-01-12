@@ -1,5 +1,5 @@
 <script src="/js/ckeditor/ckeditor.js"></script>
-<form role="form" method="post" action="/admin/createPost">
+<form role="form" method="post" action="<%=article.id ? '/admin/editPost/' + article.id : '/admin/createPost'%>">
     <div class="form-group">
     <label for="exampleInputEmail1">标题</label>
     <input type="text" value="<%=article.title ? article.title : ''%>" class="form-control" id="title" name="title" placeholder="标题" maxlength="30">

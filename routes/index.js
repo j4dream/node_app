@@ -58,6 +58,14 @@ module.exports.init = function (app) {
 		});
 	});
 
+	app.post('/admin/editPost/:id', auth.requireLogin, function(req, res) {
+		var artical = new Artical(req.body);
+		Artical.update({_id: req.params.id},  { $set: { title: artical.title, description: artical.description,content: artical.content }}, { upsert: true },function(err, article) {
+			if (err) return console.error(err);
+			res.redirect('/');
+		});
+	});
+
 	app.post('/admin/createPost', auth.requireLogin, function(req, res) {
 		var artical = new Artical(req.body);
 		artical.save(function (err, artical) {
