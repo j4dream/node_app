@@ -43,3 +43,19 @@
     </tbody>
   </table>
 </div>
+<nav>
+  <ul class="pagination">
+    <li><a href="/admin/listPost/1">&laquo;</a></li>
+    <%
+      var totalPage = Math.ceil(count / perPage);
+      for(var i=1; i <= totalPage; i++){
+    %>
+      <%if(i==page){%>
+        <li class="active"><a href="javascript:void(0);"><%=i%></a></li>
+      <%}else{%>
+        <li><a href="/admin/listPost/<%=i%>"><%=i%></a></li>
+      <%}%>
+    <%}%>
+    <li><a href="/admin/listPost/<%=totalPage%>">&raquo;</a></li>
+  </ul>
+</nav>

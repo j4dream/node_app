@@ -74,13 +74,26 @@ module.exports.init = function (app) {
   	 res.redirect('/');
 	});
 
-	app.get('/admin/listPost', auth.requireLogin, function(req, res) {
+	app.get('/admin/listPost/:page', auth.requireLogin, function(req, res) {
+		var perPage = req.params.perPage || 3;
+		var page = req.params.page || 1;
 		Artical
 		.find()
+		.limit(perPage)
+		.skip(perPage * (page - 1))
 		.sort({time:'desc'})
 		.exec(function (err, articals) {
 			if (err) return console.error(err);
-			res.render('admin/list-post', { title: 'Express', user: req.user, articles: articals});
+			Artical.count().exec(function(err, count){
+				res.render('admin/list-post', {
+						title: 'Express',
+						user: req.user,
+					 	articles: articals,
+						page: page,
+						count: count,
+						perPage: perPage
+					});
+			});
 		});
 	});
 
